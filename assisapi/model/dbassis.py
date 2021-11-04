@@ -42,3 +42,21 @@ class grupos(db.Model):
         self.id_materia = id_materia
         self.fecha_inicio = fecha_inicio
         self.no_sesiones = no_sesiones
+
+#definicion del model de la tabla alumnos
+class horarios(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    lunes = db.Column(db.String(50))
+    martes = db.Column(db.String(50))
+    miercoles = db.Column(db.String(50))
+    jueves = db.Column(db.String(50))
+    viernes = db.Column(db.String(50))
+    sabado = db.Column(db.String(50))
+
+def __init__(self, lunes, martes, miercoles, jueves, viernes, sabado):
+    self.lunes = lunes
+    self.martes = martes
+    self.miercoles = miercoles
+    self.jueves = jueves
+    self.viernes = viernes
+    self.sabado = sabado
