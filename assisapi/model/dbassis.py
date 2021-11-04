@@ -43,7 +43,7 @@ class grupos(db.Model):
         self.fecha_inicio = fecha_inicio
         self.no_sesiones = no_sesiones
 
-#definicion del model de la tabla alumnos
+#definicion del model de la tabla horarios
 class horarios(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     lunes = db.Column(db.String(50))
@@ -60,3 +60,31 @@ def __init__(self, lunes, martes, miercoles, jueves, viernes, sabado):
     self.jueves = jueves
     self.viernes = viernes
     self.sabado = sabado
+
+#definicion del model de la tabla materias
+class materias(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    id_carrera = db.Column(db.Integer, db.ForeignKey('carreras.id'))
+    nombre = db.Column(db.String(45))
+    rcarrerra = db.relationship('carreras', backref="materias", lazy='dynamic')
+    
+
+    def __init__(self,id_carrera,nombre):
+        self.id_carrera = id_carrera
+        self.nombre = nombre
+
+#definicion del model de la tabla alumnos
+class alumnos(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    id_carrera = db.Column(db.Integer)
+    nombre = db.Column(db.String(45))
+    apellidos = db.Column(db.String(45))
+    no_control = db.Column(db.String(45))
+    activo = db.Column(db.Boolean)
+
+    def __init__(self,id_carrera,nombre,apellidos,no_control,activo):
+        self.id_carrera = id_carrera
+        self.nombre = nombre
+        self.apellidos = apellidos
+        self.no_control = no_control
+        self.activo = activo
