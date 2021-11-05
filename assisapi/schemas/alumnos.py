@@ -5,9 +5,7 @@ from marshmallow import fields
 from assisapi.schemas.carreras import CarrerasEsquema
 
 app = Flask(__name__)
-
 app.config.from_object(configConexion['conexionDB'])
-
 ma = Marshmallow(app)
 
 #Esquema de la tabla alumnos
