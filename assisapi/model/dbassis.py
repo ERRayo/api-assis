@@ -15,10 +15,9 @@ class carreras(db.Model):
     def __init__(self,nombre,plan_estudios):
         self.nombre = nombre
         self.plan_estudios = plan_estudios
-
-        
+     
 #definicion del model de la tabla profesores
-class profesor(db.Model):
+class profesores(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     nombre = db.Column(db.String(45))
     apellidos = db.Column(db.String(45))
@@ -65,9 +64,7 @@ def __init__(self, lunes, martes, miercoles, jueves, viernes, sabado):
 class materias(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     id_carrera = db.Column(db.Integer, db.ForeignKey('carreras.id'))
-    nombre = db.Column(db.String(45))
-    rcarrerra = db.relationship('carreras', backref="materias", lazy='dynamic')
-    
+    nombre = db.Column(db.String(45))    
 
     def __init__(self,id_carrera,nombre):
         self.id_carrera = id_carrera

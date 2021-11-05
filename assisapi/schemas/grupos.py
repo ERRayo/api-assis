@@ -7,7 +7,6 @@ app = Flask(__name__)
 app.config.from_object(configConexion['conexionDB'])
 ma = Marshmallow(app)
 
-
 #Esquema de la tabla grupos
 class GruposEsquema(ma.Schema):     
     class Meta:  
