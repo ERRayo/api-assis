@@ -3,14 +3,15 @@ from sqlalchemy.orm import session
 from assisapi.schemas.grupos import grupo_esquema, grupos_esquema
 from assisapi.model.dbassis import grupos, db
 
-
-
 ruta_grupos = Blueprint('ruta-grupos', __name__)
 
 ###endponit - GET all grupos 
 @ruta_grupos.route('/grupo', methods=['GET'])
 def get_grupos():
     all_grupos = grupos.query.all()
+    print("\n------>\n")
+    print(all_grupos)
+    print("\n-------\n")
     result = grupos_esquema.dump(all_grupos)
     return jsonify(result)
 

@@ -15,6 +15,5 @@ class CarrerasEsquema(ma.Schema):
 
 #instancia de una sola carrera
 carrera_esquema = CarrerasEsquema()
-
 #instancia de varias carreras
 carreras_esquema = CarrerasEsquema(many=True)
