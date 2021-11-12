@@ -2,14 +2,14 @@ from flask import request, jsonify, Blueprint
 from sqlalchemy.orm import session 
 from assisapi.schemas.carreras import carrera_esquema, carreras_esquema
 from assisapi.model.dbassis import carreras, db
+from assisapi import app
 
 ruta_carreras = Blueprint('ruta-carreras', __name__)
 
 ###endponit - GET all carreras 
 @ruta_carreras.route('/carrera', methods=['GET'])
 def get_carreras():
-    all_carreras = db.session.query(carreras)
-    print(all_carreras)
+    all_carreras = carreras.query.all()
     result = carreras_esquema.dump(all_carreras)
     return jsonify(result)
 

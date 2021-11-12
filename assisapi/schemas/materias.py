@@ -1,18 +1,15 @@
-from flask import Flask
-from flask_marshmallow import Marshmallow
-from assisapi.config.default import configConexion
+from assisapi import ma
 from marshmallow import fields
-from assisapi.schemas.carreras import CarrerasEsquema
 
-app = Flask(__name__)
-app.config.from_object(configConexion['conexionDB'])
-ma = Marshmallow(app)
 
 #Esquema de la tabla materias
 class MateriasEsquema(ma.Schema):      
-    class Meta: 
-        fields = ('id','nombre', 'id_carrera', 'rcarrerra')
-        ordered = True  
+    id = fields.Integer()
+    nombre = fields.String()    
+    id_carrera = fields.String()
+    carrera = fields.Nested("CarrerasEsquema")
+
+    
 
 #instancia de una sola materia
 materia_esquema = MateriasEsquema()

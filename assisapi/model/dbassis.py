@@ -1,20 +1,16 @@
-from flask import Flask
-from flask_sqlalchemy import SQLAlchemy
-from assisapi.config.default import configConexion
-
-app = Flask(__name__)
-app.config.from_object(configConexion['conexionDB'])
-db = SQLAlchemy(app)
+from assisapi import db
 
 #definicion del model de la tabla carreras
 class carreras(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     nombre = db.Column(db.String(45))
     plan_estudios = db.Column(db.String(45))
+    rmaterias = db.relationship('materias', backref=db.backref('carrera', lazy=True))
+    ralumno = db.relationship('alumnos', backref=db.backref('carrera', lazy=True))
 
-    def __init__(self,nombre,plan_estudios):
-        self.nombre = nombre
-        self.plan_estudios = plan_estudios
+    #def __init__(self,nombre,plan_estudios):
+    #    self.nombre = nombre
+    #    self.plan_estudios = plan_estudios
      
 #definicion del model de la tabla profesores
 class profesores(db.Model):
@@ -62,18 +58,19 @@ def __init__(self, lunes, martes, miercoles, jueves, viernes, sabado):
 
 #definicion del model de la tabla materias
 class materias(db.Model):
-    id = db.Column(db.Integer, primary_key=True)
+    id = db.Column(db.Integer, primary_key=True)   
+    nombre = db.Column(db.String(45))  
     id_carrera = db.Column(db.Integer, db.ForeignKey('carreras.id'))
-    nombre = db.Column(db.String(45))    
+    
 
-    def __init__(self,id_carrera,nombre):
-        self.id_carrera = id_carrera
-        self.nombre = nombre
+    #def __init__(self,id_carrera,nombre):
+    #    self.id_carrera = id_carrera
+    #    self.nombre = nombre
 
 #definicion del model de la tabla alumnos
 class alumnos(db.Model):
     id = db.Column(db.Integer, primary_key=True)
-    id_carrera = db.Column(db.Integer)
+    id_carrera = db.Column(db.Integer, db.ForeignKey('carreras.id'))
     nombre = db.Column(db.String(45))
     apellidos = db.Column(db.String(45))
     no_control = db.Column(db.String(45))
@@ -85,3 +82,5 @@ class alumnos(db.Model):
         self.apellidos = apellidos
         self.no_control = no_control
         self.activo = activo
+
+db.create_all()

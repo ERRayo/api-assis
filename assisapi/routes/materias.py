@@ -1,26 +1,24 @@
 from flask import request, jsonify, Blueprint
 from sqlalchemy.orm import session 
-from assisapi.schemas.materias import materia_esquema, materias_esquema
-from assisapi.model.dbassis import materias, db
+from assisapi.schemas.materias import materia_esquema, materias_esquema, MateriasEsquema
+from assisapi.model.dbassis import materias, carreras
+from assisapi import db
 
 ruta_materias = Blueprint('ruta-materias', __name__)
 
 ###endponit - GET all materias 
 @ruta_materias.route('/materia', methods=['GET'])
 def get_materias(): 
-    all_materias = db.session.query(materias)
-    print("\n---> Resultado consulta<----\n")
-    print(all_materias)
-    print("\n---> Resultado consulta<----\n")
+    all_materias = materias.query.all()
     result = materias_esquema.dump(all_materias)
-    print(result)
     return jsonify(result)
 
 ###endpoint - GET from ID materia
 @ruta_materias.route('/materia/<id>', methods=['GET'])
 def get_materia(id):
-    materia_id = materias.query.get(id)
-    return materia_esquema.jsonify(materia_id)
+    materia_id = db.session.query(materias).get(id)
+    result = materia_esquema.dump(materia_id)
+    return jsonify(result)
 
 ###endpoint - POST Creacion de materia
 @ruta_materias.route('/materia', methods=['POST'])
