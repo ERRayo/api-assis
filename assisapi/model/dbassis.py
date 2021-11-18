@@ -8,9 +8,9 @@ class carreras(db.Model):
     rmaterias = db.relationship('materias', backref=db.backref('carrera', lazy=True))
     ralumno = db.relationship('alumnos', backref=db.backref('carrera', lazy=True))
 
-    #def __init__(self,nombre,plan_estudios):
-    #    self.nombre = nombre
-    #    self.plan_estudios = plan_estudios
+    def __init__(self,nombre,plan_estudios):
+        self.nombre = nombre
+        self.plan_estudios = plan_estudios
      
 #definicion del model de la tabla profesores
 class profesores(db.Model):

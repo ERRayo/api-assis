@@ -27,7 +27,8 @@ def create_carrera():
     new_carrera = carreras(nombre, plan_estudios)
     db.session.add(new_carrera)
     db.session.commit()
-    return carrera_esquema.jsonify(new_carrera)
+    result = carrera_esquema.dump(new_carrera)
+    return jsonify(result)
 
 ###endpoint - PUT carrera
 @ruta_carreras.route('/carrera/<id>', methods=['PUT'])
