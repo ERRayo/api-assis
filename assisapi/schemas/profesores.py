@@ -1,16 +1,10 @@
-from flask import Flask
-from flask_marshmallow import Marshmallow
-from assisapi.config.default import configConexion
+from assisapi import ma
 from marshmallow import fields
-
-app = Flask(__name__)
-app.config.from_object(configConexion['conexionDB'])
-ma = Marshmallow(app)
 
 #Esquema de la tabla profesores
 class ProfesoresEsquema(ma.Schema):     
     class Meta:  
-        fields = ('id','nombre','apellidos','no_trabajador')
+        fields = ('id','nombre','apellido_paterno','apellido_materno','no_trabajador')
 
 #instancia de un solo profesor
 profesor_esquema = ProfesoresEsquema()

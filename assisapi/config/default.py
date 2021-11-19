@@ -10,7 +10,7 @@ class ConexionDBConfig():
     MySQL_DB = 'asistencias'
 
     SECRET_KEY = 'Test'
-    SQLALCHEMY_DATABASE_URI = 'mysql+pymysql://root:admin@localhost:3306/asistencias'
+    SQLALCHEMY_DATABASE_URI = 'mysql+pymysql://root:admin@localhost:3306/db_assis'
     SQLALCHEMY_TRACK_MODIFICATIONS = False
 
 
