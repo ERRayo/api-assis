@@ -1,19 +1,16 @@
-from flask import Flask
-from flask_marshmallow import Marshmallow
-from assisapi.config.default import configConexion
-from marshmallow import fields
-
-app = Flask(__name__)
-app.config.from_object(configConexion['conexionDB'])
-ma = Marshmallow(app)
+from assisapi import ma
+from marshmallow import fields, Schema
 
 #Esquema de la tabla carreras
-class CarrerasEsquema(ma.Schema):    
-    class Meta:
-        fields = ('id','nombre','plan_estudios')
-        ordered = True
+class CarrerasEsquema(Schema):
+    id = fields.Integer()
+    nombre = fields.String()
+    plan_estudios = fields.String()
+    #materias = fields.List(fields.Nested("MateriasEsquema"))
+    
+
 
 #instancia de una sola carrera
 carrera_esquema = CarrerasEsquema()
 #instancia de varias carreras
-carreras_esquema = CarrerasEsquema(many=True)
+carreras_esquema = CarrerasEsquema(many = True)
