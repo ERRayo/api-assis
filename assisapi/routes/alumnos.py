@@ -15,7 +15,7 @@ def get_alumnos():
 ###endpoint - GET from ID alumno
 @ruta_alumnos.route('/alumno/<id>', methods=['GET'])
 def get_alumno(id):
-    alumno_id = alumnos.query.get(id)
+    alumno_id = alumno.query.get(id)
     return alumno_esquema.jsonify(alumno_id)
 
 ###endpoint - POST Creacion de alumno
