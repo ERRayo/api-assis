@@ -5,7 +5,7 @@ from assisapi.config.default import configConexion
 
 
 
-app = Flask(__name__)
+application = app = Flask(__name__)
 
 app.config.from_object(configConexion['conexionDB'])
 
